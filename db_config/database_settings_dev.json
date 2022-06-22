@@ -2,9 +2,9 @@
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "postgres",
-        "USER": "service_app",
-        "PASSWORD": "DBP!app123$",
-        "HOST": "10.70.171.36",
+        "USER": "ibeomsu",
+        "PASSWORD": "",
+        "HOST": "127.0.0.1",
         "PORT": "5432",
         "IS_MASTER": true
     }

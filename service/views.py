@@ -1,7 +1,11 @@
+from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 
 from library.common import return_response, get_request_data
 from middleware.share_data import ShareData
+from service.models import Work
+
 
 def run(func, data):
     """
@@ -15,7 +19,8 @@ def run(func, data):
     else:
         return_data = None
 
-    return return_response(status_code=200, message="요청 성공", data=return_data)
+    return return_response(status_code=200, message="Success", data=return_data)
+
 
 @api_view(['POST', 'GET'])
 def alive_check(request):
@@ -30,7 +35,10 @@ def add(request):
 
 
 def _add(data):
-    return int(data['num1'])+int(data['num2'])
+    return int(data['num1']) + int(data['num2'])
 
 
-
+def home(request):
+    work_list = Work.objects.order_by('-start_time')
+    context = {'work_list': work_list}
+    return render(request, 'service/work_list.html', context)

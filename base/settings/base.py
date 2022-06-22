@@ -1,7 +1,9 @@
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-)1d81d3gtc4up!7#x$6c=3r)jfc75u=2b4lkug^72nx3hj4+&'
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'service.apps.ServiceConfig',
 ]
 
 NO_COOKIE_URL = [
@@ -59,9 +62,7 @@ MIDDLEWARE_CLASSES = [
    'django.contrib.messages.middleware.MessageMiddleware',
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
    'corsheaders.middleware.CorsMiddleware',
-    'middleware.wehago_session_check.SessionCheck',
-    'middleware.kibana_log.LogAndExceptionController',
-    'middleware.share_data.ShareData',
+   'middleware.share_data.ShareData',
 ]
 
 MIDDLEWARE = MIDDLEWARE_CLASSES
@@ -72,7 +73,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,9 +131,9 @@ CACHES = {
 
 # Internationalization
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/seoul'
 
 USE_I18N = True
 
