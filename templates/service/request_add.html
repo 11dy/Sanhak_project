@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <h2>인식 작업 요청</h2>
+    <h3>Object Storage에서 선택</h3>
+    <table>
+        <tr>언어 설정</tr>
+        <tr>
+            <select id = setting_languages>
+                <option value="KR">KR 한국어</option>
+            </select>
+        </tr>
+    </table>
+    <br>
+    <p>대상 파일 선택</p>
+    <table>
+        <tbody>
+            <th><input type="checkbox"></th>
+            <th>testob</th>
+            <tr>
+                <input type="checkbox">
+            </tr>
+            <tr>test1.mp3</tr>
+            <tr>3MB</tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

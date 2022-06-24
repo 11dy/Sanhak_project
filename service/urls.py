@@ -21,5 +21,6 @@ urlpatterns = [
         path('alivecheck/', alive_check),
         path('add/', add),
         path('', home),
+        path('request_add', request_add),
     ]
 

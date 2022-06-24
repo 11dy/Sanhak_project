@@ -151,6 +151,10 @@ TEMPLATE_DIRS = [(os.path.join(BASE_DIR,  '../templates')), ]
 
 CONFIG_DIR = os.path.join(BASE_DIR, '../db_config/')
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
+
 # 서비스 업데이트 여부
 UPDATE = False
 

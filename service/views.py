@@ -42,3 +42,7 @@ def home(request):
     work_list = Work.objects.order_by('-start_time')
     context = {'work_list': work_list}
     return render(request, 'service/work_list.html', context)
+
+
+def request_add(request):
+    return render(request, 'service/request_add.html')
