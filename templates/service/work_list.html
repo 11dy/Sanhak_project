@@ -77,6 +77,7 @@
             <th>결과 파일 위치</th>
             <th>작업 시작일(UTC+09:00)</th>
             <th>작업 종료일(UTC:09:00)</th>
+            <th>인식 결과 편집</th>
         </tr>
         </thead>
         <tbody>
@@ -90,6 +91,7 @@
             <td>{{ work.result_path }}</td>
             <td>{{ work.start_time }}</td>
             <td>{{ work.end_time }}</td>
+            <td><a class="btn btn-secondary" href=/Users/yunseojin/project/sanhak/Sanhak_project/templates/service/edit_file.html" role="button">인식 결과 편집</a></td>
         </tr>
         {% endfor %}
         {% else %}
