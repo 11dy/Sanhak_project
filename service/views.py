@@ -46,3 +46,7 @@ def home(request):
 
 def request_add(request):
     return render(request, 'service/request_add.html')
+
+
+def edit_file(request):  # edit_file 가는 함수
+    return render(request, 'service/edit_file.html')

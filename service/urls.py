@@ -18,9 +18,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-        path('alivecheck/', alive_check),
-        path('add/', add),
-        path('', home),
-        path('request_add', request_add),
-    ]
-
+    path('alivecheck/', alive_check),
+    path('add/', add),
+    path('', home),
+    path('request_add', request_add),
+    path('edit_file', edit_file)  # edit_file 경로 추가
+]

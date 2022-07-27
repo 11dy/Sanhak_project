@@ -1,6 +1,103 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<div class="container ">
+    <!--헤더 -->
+    <div class="navbar sticky-top bg-dark text-white p-md-3">
+        <h4>인식결과</h4>
+    </div>
 
 
+    <div class="row py-2">
+    <div class="col-sm-5">
+    <!--오디오 및 동영상 표시 -->
+    <div class="col">
+    <img src="https://w7.pngwing.com/pngs/952/614/png-transparent-microphone-digital-audio-sound-recording-and-reproduction-computer-icons-microphone-electronics-microphone-logo.png"
+        class="rounded img-fluid">
+    <p class="m-0 p-1">2022012112200122941_A_3309.mp3</p>
+    <p class="m-0 p-1 text-black-50">파일시간: 00:03:36 / 문장수: 26 </p>
+    </div>
+
+    <!--단축키 설명-->
+    <div class="col" >
+    <table class="table table">
+        <thead>
+        <tr class="table-dark">
+        <th>단축키</th>
+        <td>
+        <button  type="button" class="btn-close float-end" aria-label="Close"></button>
+        </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>선택 문장 다시 재생: <b>Alt + R</b></td>
+            <td>다음 문장으로 이동: <b>Tab</b> </td>
+        </tr>
+        <tr>
+            <td>이전 문장으로 이동: <b>Shift + Tab</b> </td>
+            <td>첫문장으로 이동:<b>Alt + 윗화살표</b> </td>
+        </tr>
+        <tr>
+            <td>마지막 문장으로 이동: <b>Alt + 아래화 살표</b></td>
+            <td>저장하기: <b>ctrl(Command)</b> + s</td>
+        </tr>
+        <tr>
+            <td>작업완료:<b>ctrl(Command) + e</b></td>
+            <td>내보내기: <b>ctrl(Command) + r</b> </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+
+    <!--라벨링 화면 -->
+    <div class="col-sm" >
+    <form action="" method="post">
+    <table class="table table-bordered table-striped">
+    <thead>
+    <tr class="table-dark">
+       <th>타임 라인</th>
+       <th>인식결과 편집</th>
+       </tr>
+    </thead>
+    <tbody>
+       <tr>
+       <td>00:00:03-00:00:06</td>
+       <td>안녕하세요 세무법인 성신입니다.</td>
+       </tr>
+       <tr>
+       <td>00:00:07-00:00:15</td>
+       <td>전화주셔서 감사합니다. 세무법인 성심입니다, 네 도준입니다 고객님 예 잠시만요</td>
+       </tr>
+         <tr>
+       <td>#</td>
+       <td>#</td>
+       </tr>
+         <tr>
+       <td>#</td>
+       <td>#</td>
+       </tr>
+         <tr>
+       <td>#</td>
+       <td>#</td>
+       </tr>
+    </tbody>
+    </table>
+    </form>
+    </div>
+    </div>
+
+    <!--음성 조절바 -->
+    <div class="navbar-fixed-bottom  p-md-3 row table-bordered">
+        <button class="btn col-1 btn-dark btn-sm w-auto">plays</button>
+        <button class="btn col-1 btn-dark btn-sm w-auto">sound</button>
+    <div class="progress col" style="height: 30px;">
+        <div class="progress-bar pr" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            진행 바 입니당. (70%)
+        </div>
+    </div>
+    </div>
+
+</div>
 {% endblock %}
