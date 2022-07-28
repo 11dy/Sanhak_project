@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-        <script src="{% static 'js/bootstrap.js' %}"></script>
-
+        <link rel="stylesheet" type="text/css" href="{% static '/css/musicBar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/modal.css' %}">
     <title>Main Page</title>
     </head>
     <body>
@@ -19,8 +19,13 @@
     {% block content %}
     {% endblock %}
     <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+    <!--로딩 시간을 위해 js를 가장 마지막에 로드-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{%   static '/js/audioPlay.js'%}"></script>
+   <script src="{%   static '/js/modalFunction.js'%}"></script>
     </body>
 </html>

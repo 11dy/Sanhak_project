@@ -25,10 +25,37 @@
 </ul>
 <div class="tab-content">
   <div class="tab-pane fade show active" id="qwe">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id ornare libero. Vivamus iaculis, justo vel mattis pharetra, nisi ligula varius nisl, sit amet mollis tortor ligula vitae nisi.</p>
+      <div class="modalTop">
+          <div class="modalTopLeft">
+              <span>결과 파일 위치</span>
+              <span>언어 설정</span>
+              <span>화자분리 기능 사용</span>
+          </div>
+          <div class="modalTopRight">
+              <div class="directorySelect">
+                  <input type="file" webkitdirectory id="directoryUpload">
+              </div>
+              <div class="languageSelect">
+                 <button class="dropDownBtn" onclick="dpLanguage()">
+                     언어선택
+                 </button>
+                  <ul style="display: none"; id="dropContents">
+                      <li>한국어</li>
+                      <li>English</li>
+                  </ul>
+
+              </div>
+              <div class="divideNarrator">
+
+              </div>
+          </div>
+      </div>
+      <div class="selectFile">
+          <h4>대상 파일 선택</h4>
+          <div></div>
+      </div>
   </div>
   <div class="tab-pane fade" id="asd">
-    <p>Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
   </div>
 </div>
       </div>
