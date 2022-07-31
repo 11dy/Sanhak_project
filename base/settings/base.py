@@ -32,8 +32,6 @@ CORS_ALLOW_HEADERS = (
     'Cookie',
 )
 
-
-
 # Application definition
 INSTALLED_APPS = [
     'rest_framework',
@@ -45,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'service.apps.ServiceConfig',
+    'labeling.apps.LabelingConfig',
 ]
 
 NO_COOKIE_URL = [
@@ -52,20 +51,18 @@ NO_COOKIE_URL = [
     '/simulator/alivecheck/',
 ]
 
-
 MIDDLEWARE_CLASSES = [
-   'django.middleware.security.SecurityMiddleware',
-   'django.contrib.sessions.middleware.SessionMiddleware',
-   'django.middleware.common.CommonMiddleware',
-   'django.contrib.auth.middleware.AuthenticationMiddleware',
-   'django.contrib.messages.middleware.MessageMiddleware',
-   'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   'corsheaders.middleware.CorsMiddleware',
-   'middleware.share_data.ShareData',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'middleware.share_data.ShareData',
 ]
 
 MIDDLEWARE = MIDDLEWARE_CLASSES
-
 
 ROOT_URLCONF = 'base.urls'
 
@@ -94,14 +91,12 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'base.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -123,10 +118,9 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
-        'TIMEOUT':0
+        'TIMEOUT': 0
     }
 }
-
 
 # Internationalization
 
@@ -140,14 +134,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [(os.path.join(BASE_DIR,  '../static')), ]
+STATICFILES_DIRS = [(os.path.join(BASE_DIR, '../static')), ]
 
-TEMPLATE_DIRS = [(os.path.join(BASE_DIR,  '../templates')), ]
+TEMPLATE_DIRS = [(os.path.join(BASE_DIR, '../templates')), ]
 
 CONFIG_DIR = os.path.join(BASE_DIR, '../db_config/')
 
@@ -159,5 +152,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 UPDATE = False
 
 SERVICE_NAME = 'simulator'
-
-

@@ -20,7 +20,7 @@ class Message:
     message_401 = 'Your token is not valid or does not exist.'
     message_404 = 'Data does not exist.'
     message_500 = 'Internal server error.'
-    message_9999 = 'service updating'
+    message_9999 = 'labeling updating'
 
 
 def return_response(

@@ -16,7 +16,7 @@ def make_logdata(request):
     data['cno'] = cookie_dict.get('cell_company_no','')
     data['user_id'] = cookie_dict.get('h_portal_id','')
     data['emp_no'] = cookie_dict.get('h_selected_employee_no','')
-    data["service"] = settings.SERVICE_NAME
+    data["labeling"] = settings.SERVICE_NAME
     if request.method.upper() == "GET":
         data["request-param"] = str(request.GET)
     else:
