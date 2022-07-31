@@ -13,14 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path
 
+import base.settings.base
 from .views import *
+
+app_name = 'service'
 
 urlpatterns = [
     path('alivecheck/', alive_check),
     path('add/', add),
     path('', home),
-    path('request_add', request_add),
+    path('add_file/', add_file),
     path('edit_file', edit_file)  # edit_file 경로 추가
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
