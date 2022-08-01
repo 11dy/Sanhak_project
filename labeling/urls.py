@@ -8,5 +8,6 @@ app_name = 'labeling'
 urlpatterns = [
     path('', home),
     path('add_file/', add_file),
-    path('edit_file', edit_file)  # edit_file 경로 추가
+    path('edit_file/', edit_file),  # edit_file 경로 추가
+    path('delete_file/', delete_file),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

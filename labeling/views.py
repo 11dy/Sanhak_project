@@ -18,11 +18,9 @@ def add_file(request):
     """로컬에 있는 오디오 파일을 서버에 업로드 하는 코드"""
 
     if request.method == 'POST':
-        title = request.POST['title']
         audio = request.FILES["audio_file"]
         language = request.POST['language']
         fileupload = AudioFile(
-            file_name=title,
             audio_file=audio,
             language=language,
             status="작업 대기",
@@ -34,5 +32,15 @@ def add_file(request):
         fileupload.save()
         return redirect('/labeling/')
     else:
+
+        return redirect('/labeling/')
+
+
+def delete_file(request):
+    if request.method == 'POST':
+        delete_list = request.POST.getlist('checked[]')
+        for delete_id in delete_list:
+            record = AudioFile.objects.get(id=delete_id)
+            record.delete()
 
         return redirect('/labeling/')
