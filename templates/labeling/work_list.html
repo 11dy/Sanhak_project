@@ -15,25 +15,25 @@
 
         <!--모달창 내부 작업 설정창 -->
       <div class="modal-body">
- <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#qwe">Object storage 에서 선택</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#asd">파일 업로드</a>
-  </li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane fade show active" id="qwe">
-      <p> 언어 설정
-                <select name="language">
-                    <option label="KR 한국어">
-                    <option label="EN English">
-                    <option label="KR/EN 한영 멀티 인식">
-                    <option label="JP 일본어">
-                </select>
-      </p>
-      <p>대상 파일 선택</p>
+          <ul class="nav nav-tabs">
+              <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#qwe">Object storage 에서 선택</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#asd">파일 업로드</a>
+              </li>
+          </ul>
+          <div class="tab-content">
+              <div class="tab-pane fade show active" id="qwe">
+                  <p> 언어 설정
+                      <select name="language">
+                          <option label="KR 한국어">
+                          <option label="EN English">
+                          <option label="KR/EN 한영 멀티 인식">
+                          <option label="JP 일본어">
+                      </select>
+                  </p>
+                  <p>대상 파일 선택</p>
 
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
       <input type="submit" class="btn btn-primary" value="요청 시작">
@@ -72,6 +72,10 @@
         인식 작업 요청
     </button>
     </th>
+    <th>
+        <form action="/labeling/delete_file/" method="POST" enctype="multipart/form-data">
+        <button type="submit" class="btn btn-dark btn-lg btn-block" value="삭제">삭제</button>
+    </th>
 </tbody>
 </table>
 
@@ -79,14 +83,29 @@
 
 
 <div class ="container my-3">
-    <form action="/labeling/delete_file/" method="POST" enctype="multipart/form-data">
-    <button type="submit" class="btn btn-dark btn-lg btn-block" value="삭제">삭제</button>
     <table class="table">
         <thead>
         <tr class="table-dark">
             <th><input id="allCheck" type="checkbox"></th>
             <th>작업 대상</th>
-            <th>작업 현황</th>
+            <th class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                작업 현황 <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu">
+
+                    <li><a href="#">작업 대기</a></li>
+
+                    <li><a href="#">작업 중</a></li>
+
+                    <li><a href="#">취소 완료</a></li>
+
+                    <li><a href="#">취소 중</a></li>
+                    <li><a href="#">작업 실패</a></li>
+                    <li><a href="#">작업완료</a></li>
+                </ul>
+            </th>
             <th>요청 방법</th>
             <th>작업 시작일(UTC+09:00)</th>
             <th>작업 종료일(UTC:09:00)</th>
@@ -99,7 +118,7 @@
         <tr>
             <td><input type="checkbox" name="checked" value="{{ work.id }}"></td>
             <td>{{ work.audio_file }}</td>
-            <td>{{ work.status }}</td>
+            <td class="fileStatus">{{ work.status }}</td>
             <td>{{ work.request_method }}</td>
             <td>{{ work.start_time }}</td>
             <td>{{ work.end_time }}</td>
