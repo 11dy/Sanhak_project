@@ -38,7 +38,7 @@ def add_file(request):
 
 def delete_file(request):
     if request.method == 'POST':
-        delete_list = request.POST.getlist('checked[]')
+        delete_list = request.POST.getlist('checked')
         for delete_id in delete_list:
             record = AudioFile.objects.get(id=delete_id)
             record.delete()
