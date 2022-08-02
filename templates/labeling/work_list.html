@@ -75,19 +75,9 @@
     <th>
         <form action="/labeling/delete_file/" method="POST" enctype="multipart/form-data">
         <button type="submit" class="btn btn-dark btn-lg btn-block" value="삭제">삭제</button>
-        </form>
     </th>
 </tbody>
 </table>
-
-<!--검색창-->
-<nav>
-    <form action="/labeling/search_result/" method="POST">
-        <input type="text" name="search_text">
-        <input type="submit" name="검색">
-    </form>
-</nav>
-
 
 <div class ="container my-3">
     <table class="table">
@@ -180,4 +170,11 @@
     </form>
 </div>
 </div>
+    <!--검색창-->
+<nav>
+    <form action="/labeling/search_result/" method="POST">
+        <input type="text" name="search_text">
+        <input type="submit" name="검색">
+    </form>
+</nav>
 {% endblock %}
