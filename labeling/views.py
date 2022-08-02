@@ -2,13 +2,19 @@ import datetime
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
+from django.core.paginator import Paginator
 from labeling.models import AudioFile
 
 
 def home(request):
+    page = int(request.GET.get('page', 1))
+    print('test')
     work_list = AudioFile.objects.order_by('-start_time')
-    context = {'work_list': work_list}
+    paginator = Paginator(work_list, 5)
+    print("test2")
+    page_obj = paginator.get_page(page)
+    # context = {'work_list': work_list}
+    context = {'work_list': page_obj}
     return render(request, 'labeling/work_list.html', context)
 
 
@@ -57,3 +63,7 @@ def search_result(request):
         context = {'work_list': work_list}
 
         return render(request, 'labeling/work_list.html', context)
+
+
+
+
