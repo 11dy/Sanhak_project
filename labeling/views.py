@@ -1,6 +1,5 @@
 import datetime
 
-from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from labeling.models import AudioFile
