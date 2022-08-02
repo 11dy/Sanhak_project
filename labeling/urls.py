@@ -10,4 +10,5 @@ urlpatterns = [
     path('add_file/', add_file),
     path('edit_file/', edit_file),  # edit_file 경로 추가
     path('delete_file/', delete_file),
+    path('search_result/', search_result),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

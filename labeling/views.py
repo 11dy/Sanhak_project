@@ -1,4 +1,6 @@
 import datetime
+
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from labeling.models import AudioFile
@@ -44,3 +46,14 @@ def delete_file(request):
             record.delete()
 
         return redirect('/labeling/')
+
+
+def search_result(request):
+    """특정 파일 검색"""
+
+    if request.method == 'POST':
+        query = request.POST.get('search_text')
+        work_list = AudioFile.objects.filter(audio_file__contains=query)
+        context = {'work_list': work_list}
+
+        return render(request, 'labeling/work_list.html', context)
