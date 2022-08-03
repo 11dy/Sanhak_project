@@ -1,7 +1,7 @@
 import datetime
 
 from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
+from django.core.files.storage import default_storage, FileSystemStorage
 from django.db import models
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
@@ -87,24 +87,22 @@ def get_file_list():
 
 
 def add_object_storage(request):
-    from django.core.files import File
 
-    file = request.GET.get('file')
-    language = request.GET.get('langauge')
+    if request.method == "GET":
+        file = request.GET.get('file')
+        language = request.GET.get('language')
 
-    file = FileClass(file)
-    new_file = File(open(file.path), file.file_name)
+        new_file = FileClass(file)
 
-    print(new_file)
-    fileupload = AudioFile(
-        audio_file=new_file,
-        language=language,
-        status="작업 대기",
-        request_method="오브젝트 스토리지",
-        start_time=datetime.datetime.now(),
-        end_time=datetime.datetime.now(),
-    )
+        fileupload = AudioFile(
+            audio_file=new_file.path,
+            language=language,
+            status="작업 대기",
+            request_method="Object Storage에서 선택",
+            start_time=datetime.datetime.now(),
+            end_time=datetime.datetime.now(),
+        )
+        fileupload.audio_file.name = new_file.file_name
+        fileupload.save()
 
-    fileupload.save()
-
-    return redirect('/labeling/')
+        return redirect('/labeling/')

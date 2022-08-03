@@ -16,4 +16,6 @@ class AudioFile(models.Model):
 
     def delete(self, *args, **kwargs):
         super(AudioFile, self).delete(*args, **kwargs)
-        os.remove(os.path.join(settings.MEDIA_ROOT, self.audio_file.path))
+
+        if self.request_method == "파일 업로드":
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.audio_file.path))
