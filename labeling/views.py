@@ -1,8 +1,17 @@
 import datetime
 
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.db import models
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+
+import base.settings.base
 from labeling.models import AudioFile
+
+import os
+
+from labeling.utils import FileClass
 
 
 def home(request):
@@ -10,7 +19,8 @@ def home(request):
     work_list = AudioFile.objects.order_by('-start_time')
     paginator = Paginator(work_list, 5)
     page_obj = paginator.get_page(page)
-    context = {'work_list': page_obj}
+    file_list = get_file_list()
+    context = {'work_list': page_obj, 'file_list': file_list}
     return render(request, 'labeling/work_list.html', context)
 
 
@@ -23,6 +33,7 @@ def add_file(request):
 
     if request.method == 'POST':
         audio = request.FILES["audio_file"]
+        print(audio)
         language = request.POST['language']
         fileupload = AudioFile(
             audio_file=audio,
@@ -61,5 +72,39 @@ def search_result(request):
         return render(request, 'labeling/work_list.html', context)
 
 
+def get_file_list():
+
+    path = base.settings.base.MEDIA_ROOT + '/testob/'
+    file_list = os.listdir(path)
+
+    file_class_list = []
+
+    for file_name in file_list:
+        file = FileClass(file_name)
+        file_class_list.append(file)
+
+    return file_class_list
 
 
+def add_object_storage(request):
+    from django.core.files import File
+
+    file = request.GET.get('file')
+    language = request.GET.get('langauge')
+
+    file = FileClass(file)
+    new_file = File(open(file.path), file.file_name)
+
+    print(new_file)
+    fileupload = AudioFile(
+        audio_file=new_file,
+        language=language,
+        status="작업 대기",
+        request_method="오브젝트 스토리지",
+        start_time=datetime.datetime.now(),
+        end_time=datetime.datetime.now(),
+    )
+
+    fileupload.save()
+
+    return redirect('/labeling/')

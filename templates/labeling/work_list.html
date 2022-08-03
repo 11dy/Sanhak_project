@@ -25,27 +25,52 @@
           </ul>
           <div class="tab-content">
               <div class="tab-pane fade show active" id="qwe">
+                <form action = "/labeling/add_object_storage/" method="get" enctype="multipart/form-data">
                   <p> 언어 설정
                       <select name="language">
-                          <option label="KR 한국어">
-                          <option label="EN English">
-                          <option label="KR/EN 한영 멀티 인식">
-                          <option label="JP 일본어">
+                          <option label="KR 한국어" value="KR 한국어">
+                          <option label="EN English" value="EN English">
+                          <option label="KR/EN 한영 멀티 인식" value="KR/EN 한영 멀티 인식">
+                          <option label="JP 일본어" value="JP 일본어">
                       </select>
                   </p>
-                  <p>대상 파일 선택</p>
-
+                  <p> 대상 파일 선택
+                      <table>
+                        <thead>
+                            <tr>
+                                <td> </td>
+                                <td>testob</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if file_list %}
+                            {% for file in file_list %}
+                            <tr>
+                                <td><input type="checkbox" name="file" value="{{ file }}"></td>
+                                <td>{{ file.file_name }}</td>
+                                <td>{{ file.size }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>내부 디렉토리에 파일이 없습니다.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                      </table>
+                  </p>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
       <input type="submit" class="btn btn-primary" value="요청 시작">
-  </div>
+      </form>
+              </div>
   <div class="tab-pane fade" id="asd">
       <form action="/labeling/add_file/" method="POST" enctype="multipart/form-data">
             <p> 언어 설정
                 <select name="language">
-                    <option label="KR 한국어">
-                    <option label="EN English">
-                    <option label="KR/EN 한영 멀티 인식">
-                    <option label="JP 일본어">
+                    <option label="KR 한국어" value="KR 한국어">
+                    <option label="EN English" value="EN English">
+                    <option label="KR/EN 한영 멀티 인식" value="KR/EN 한영 멀티 인식">
+                    <option label="JP 일본어" value="JP 일본어">
                 </select>
             </p>
             <p>파일 업로드 <input type="file" name="audio_file"></p>
