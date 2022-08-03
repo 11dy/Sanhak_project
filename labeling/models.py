@@ -4,15 +4,15 @@ import base.settings.base as settings
 
 
 class AudioFile(models.Model):
-    audio_file = models.FileField(null=True, upload_to="", blank=True)
-    language = models.TextField()
-    status = models.TextField()
-    request_method = models.TextField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    audio_file = models.FileField(null=True, upload_to="", blank=False)
+    language = models.TextField(null=False, blank=False)
+    status = models.TextField(null=False, blank=False)
+    request_method = models.TextField(null=False, blank=False)
+    start_time = models.DateTimeField(null=False, blank=False)
+    end_time = models.DateTimeField(null=False, blank=False)
 
     def __str__(self):
-        return os.path.basename(self.audio_file.name)
+        return self.audio_file.name
 
     def delete(self, *args, **kwargs):
         super(AudioFile, self).delete(*args, **kwargs)

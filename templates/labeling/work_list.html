@@ -96,7 +96,7 @@
     </button>
     </th>
     <th>
-        <form action="/labeling/delete_file/" method="POST" enctype="multipart/form-data">
+        <form action="/labeling/delete_file/" method="GET" enctype="multipart/form-data">
         <button type="submit" class="btn btn-dark btn-lg btn-block" value="삭제">삭제</button>
     </th>
 </tbody>
@@ -112,15 +112,10 @@
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
                 작업 현황 <span class="caret"></span>
                 </button>
-
                 <ul class="dropdown-menu">
-
                     <li><a href="#">작업 대기</a></li>
-
                     <li><a href="#">작업 중</a></li>
-
                     <li><a href="#">취소 완료</a></li>
-
                     <li><a href="#">취소 중</a></li>
                     <li><a href="#">작업 실패</a></li>
                     <li><a href="#">작업완료</a></li>
@@ -142,7 +137,7 @@
             <td>{{ work.request_method }}</td>
             <td>{{ work.start_time }}</td>
             <td>{{ work.end_time }}</td>
-            <td><a class="btn btn-secondary" onclick="location.href='/labeling/edit_file'" role="button">인식 결과 편집</a></td>
+            <td><a class="btn btn-secondary" onclick="location.href='/labeling/edit_file/'+{{ work.id }}" role="button">인식 결과 편집</a></td>
         </tr>
         {% endfor %}
         {% else %}

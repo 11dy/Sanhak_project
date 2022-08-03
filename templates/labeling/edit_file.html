@@ -13,7 +13,7 @@
     <div class="col">
     <img src="https://w7.pngwing.com/pngs/952/614/png-transparent-microphone-digital-audio-sound-recording-and-reproduction-computer-icons-microphone-electronics-microphone-logo.png"
         class="rounded img-fluid">
-    <p class="m-0 p-1">2022012112200122941_A_3309.mp3</p>
+    <p class="m-0 p-1">{{ file }}</p>
     <p class="m-0 p-1 text-black-50">파일시간: 00:03:36 / 문장수: 26 </p>
     </div>
 
@@ -122,10 +122,7 @@
     <!-- 오디오 플레이어 HTML -->
 
     <div class="audioPlayer">
-        <audio class="audioBox" src="/static/assets/COW.mp3" controls="controls" currenttime>
-
-        </audio>
-
+        <audio class="audioBox" src="{{ file.audio_file.url }}" controls="controls" currenttime></audio>
     </div>
 
 </div>

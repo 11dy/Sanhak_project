@@ -1,14 +1,13 @@
-from django.http.multipartparser import FILE
-
-from base.settings import base
-import math, os
+from base.settings.base import MEDIA_ROOT, OBJECT_STORAGE_URL
+import math
+import os
 
 
 class FileClass:
 
     def __init__(self, file_name=""):
         self.file_name = file_name
-        self.path = base.MEDIA_ROOT + '/testob/' + file_name
+        self.path = MEDIA_ROOT + OBJECT_STORAGE_URL + file_name
         self.size = self.convert_size()
 
     def __str__(self):
