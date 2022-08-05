@@ -2,6 +2,8 @@ from base.settings.base import MEDIA_ROOT, OBJECT_STORAGE_URL
 import math
 import os
 
+from labeling.models import STTResult
+
 
 class FileClass:
 
@@ -25,3 +27,22 @@ class FileClass:
         s = round(size_bytes / p, 2)
 
         return "%s %s" % (s, size_name[i])
+
+
+def save_json_to_model(result_json, audio_file):
+    """file, 및 result json 파일을 db에 저장"""
+    stt_result = STTResult(
+        file_id=audio_file,
+        result_file=result_json
+    )
+    stt_result.save()
+
+    return stt_result
+
+
+def json_to_list(result_json):
+    """json파일을 리스트로 반환"""
+    pass
+    result_list = []
+
+    return result_list

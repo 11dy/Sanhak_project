@@ -1,14 +1,15 @@
 import datetime
+import requests
 
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
 from base.settings.base import OBJECT_STORAGE_URL, MEDIA_ROOT
-from labeling.models import AudioFile
+from labeling.models import AudioFile, STTResult
 
 import os
 
-from labeling.utils import FileClass
+from labeling.utils import FileClass, save_json_to_model, json_to_list
 
 
 def home(request):
@@ -45,6 +46,7 @@ def add_file(request):
         )
 
         fileupload.save()
+        stt_api(fileupload)
         return redirect('/labeling/')
     else:
 
@@ -98,5 +100,38 @@ def add_object_storage(request):
         )
         fileupload.audio_file.name = 'testob/' + file_name
         fileupload.save()
-
+        stt_api(fileupload)
         return redirect('/labeling/')
+
+
+def stt_api(file):
+    """file -> STT 모델에 전달"""
+    """result file -> JSON"""
+
+    model_url = "https://bigdataws.wehago.com/model_api/stt/asr"
+    audio = file.audio_file.file
+
+    body_context = {'audio': audio}
+
+    response = requests.post(model_url, files=body_context)
+
+    if response.status_code == 200:
+        result_json = response.json()
+        result = save_json_to_model(result_json, file)
+
+        print(result.result_file)
+
+    else:
+        print("error")
+
+
+def test(request):
+
+    audio = AudioFile.objects.get(id=1)
+    result = STTResult.objects.get(id=audio.id)
+
+    result_list = json_to_list(result)
+
+    context = {"audio": audio, 'result_list': result_list}
+
+    return render(request, 'labeling/test.html', context)

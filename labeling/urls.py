@@ -1,5 +1,3 @@
-from django.conf.urls.static import static
-from django.conf import settings
 from django.urls import path
 from labeling.views import *
 
@@ -12,4 +10,5 @@ urlpatterns = [
     path('delete_file/', delete_file),
     path('search_result/', search_result),
     path('add_object_storage/', add_object_storage),
+    path('test/', test)
 ]

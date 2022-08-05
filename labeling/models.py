@@ -19,3 +19,11 @@ class AudioFile(models.Model):
 
         if self.request_method == "파일 업로드":
             os.remove(os.path.join(settings.MEDIA_ROOT, self.audio_file.path))
+
+
+class STTResult(models.Model):
+    result_file = models.JSONField(default=dict)
+    file_id = models.ForeignKey("AudioFile", related_name="file", db_column="file_id", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.result_file.name
