@@ -8,8 +8,11 @@
     {% endif %}
 
     {% if result_list %}
-        {% for reulst in result_list %}
-        {{ result }}
+        {% for result in result_list %}
+            <tr>{{ result.text }}</tr>
+            <tr>{{ result.textEdited }}</tr>
         {% endfor %}
+
+
     {% endif %}
 {% endblock %}

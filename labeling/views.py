@@ -1,6 +1,6 @@
 import datetime
 import requests
-
+import json
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
@@ -9,7 +9,7 @@ from labeling.models import AudioFile, STTResult
 
 import os
 
-from labeling.utils import FileClass, save_json_to_model, json_to_list
+from labeling.utils import FileClass, save_json_to_model   #json_to_list
 
 
 def home(request):
@@ -25,8 +25,11 @@ def home(request):
 def edit_file(request, pk):  # edit_file 가는 함수
     file = AudioFile.objects.get(pk=pk)
     url = 'labeling'+file.audio_file.url
-    print(url)
-    return render(request, 'labeling/edit_file.html', {'file': file, 'url': url})
+    # print(url)
+    result = STTResult.objects.get(id=file.id)
+    result_list = result.result_file
+    context = {'file': file, 'url': url, 'result_list': result_list}
+    return render(request, 'labeling/edit_file.html', context)
 
 
 def add_file(request):
@@ -126,12 +129,9 @@ def stt_api(file):
 
 
 def test(request):
-
     audio = AudioFile.objects.get(id=1)
     result = STTResult.objects.get(id=audio.id)
-
-    result_list = json_to_list(result)
-
+    result_list = result.result_file
     context = {"audio": audio, 'result_list': result_list}
-
     return render(request, 'labeling/test.html', context)
+

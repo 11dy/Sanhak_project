@@ -3,6 +3,8 @@ import math
 import os
 
 from labeling.models import STTResult
+import json
+import requests
 
 
 class FileClass:
@@ -40,9 +42,15 @@ def save_json_to_model(result_json, audio_file):
     return stt_result
 
 
-def json_to_list(result_json):
-    """json파일을 리스트로 반환"""
-    pass
-    result_list = []
+# def json_to_list(result_json):
+#     """json파일을 리스트로 반환"""
+#     # print(result_json)
+#     # data = json.loads(result_json)
+#     # print(data["text"])
+#     # result_list = []
+#     # result_list = json.loads(result_json)
+#     # start = result_list
+#     print(5)
+#     return result_list
+# 이미 result_json이 리스트로 넘어 옴
 
-    return result_list
