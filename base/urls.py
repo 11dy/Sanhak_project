@@ -22,5 +22,6 @@ urlpatterns = [
         path('admin/', admin.site.urls),
         path('labeling/', include('labeling.urls', namespace='labeling')),
         path('service/', include('service.urls', namespace='service')),
+        path('api/', include('api.urls', namespace='api'))
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

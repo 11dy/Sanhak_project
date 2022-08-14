@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'service.apps.ServiceConfig',
     'labeling.apps.LabelingConfig',
+    'api.apps.ApiConfig',
 ]
 
 NO_COOKIE_URL = [
