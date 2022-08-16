@@ -3,10 +3,9 @@ import json
 import os
 
 from django.http import HttpResponse
-from rest_framework import viewsets, generics
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from api.models import Audio
 from api.serializer import AudioSerializer
