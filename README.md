@@ -79,7 +79,7 @@ pip3 install -r requirements.txt
 * ** git update 후**
 * ** node-moudles 안의 패키지 설치**
 ``` bash 
-npm install
+npm install --force
 
 ```
 
