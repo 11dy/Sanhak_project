@@ -75,3 +75,17 @@ pip3 install -r requirements.txt
 
 ```
 
+## React 주의 사항
+* ** git update 후**
+* ** node-moudles 안의 패키지 설치**
+``` bash 
+npm install
+
+```
+
+* ** react 모듈 설치 시**
+* ** package.json 안에 담김**
+``` bash 
+npm install --save {패키지명}
+
+```
