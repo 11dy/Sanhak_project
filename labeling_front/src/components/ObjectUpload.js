@@ -90,7 +90,7 @@ function ObjectUpload (){
                 </tbody>
             </table>
             <p></p>
-            <input type="submit" value="인식 요청"/>
+            <input type="submit" value="인식 요청" onClick={() => window.location.reload()} />
         </form>
         </>
     )

@@ -190,15 +190,15 @@
 </div>
     <!--검색창-->
     <div id="searchbox-container">
-    <div id="just-empty">
+        <div id="just-empty">
 
-    </div>
-<div id="searchbox">
-    <form action="/labeling/search_result/" method="POST">
-        <input type="text" name="search_text">
-        <input type="submit" name="검색">
-    </form>
-</div>
+        </div>
+        <div "input-group">
+            <form action="/labeling/search_result/" method="POST">
+                <input type="text" name="search_text">
+                <input type="submit" name="검색">
+            </form>
+        </div>
     </div>
 
 {% endblock %}

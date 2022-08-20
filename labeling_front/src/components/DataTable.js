@@ -5,6 +5,12 @@ import axios from 'axios';
 import { DataGrid, GridToolbar, GridColDef } from '@mui/x-data-grid';
 import Button from '@material-ui/core/Button';
 
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import FuncBtn from './FuncBtn';
+
+import Stack from '@mui/material/Stack';
+
+import Box from '@mui/material/Box';
 //열 종류및 스타일
 
 const columns : GridColDef[]= [
@@ -42,6 +48,9 @@ export default function DataTable() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  {/*삭제 버튼 구현을 위한 변수*/}
+  const [selectionModel, setSelectionModel] = useState([]);
+
   useEffect(() => {
     const fetchFiles = async () => {
       try {
@@ -69,12 +78,54 @@ export default function DataTable() {
 
   return (
     <div style={{ height: 650, width: '100%' }}>
+
+      {/*인식 요청 및 삭제 버튼*/}
+        <Box sx={{ width: '100%' }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          justifyContent='flex'
+        >
+          {/*인식, 삭제 버튼 */}
+          <Box>
+              <FuncBtn></FuncBtn>
+            {/*선택된 row의 id를 가져와서 필터링 해주는 버튼*/}
+              <Button
+        onClick={() => {
+          const selectedIDs = new Set(selectionModel);
+          setFiles((r) => r.filter((x) => !selectedIDs.has(x.id)));
+        }}
+        variant="contained"
+        startIcon={<DeleteOutlinedIcon /> }
+      >
+        삭제
+      </Button>
+          </Box>
+        </Stack>
+      </Box>
+
+
       <DataGrid
         disableColumnFilter
         disableColumnSelector
         disableDensitySelector
         rows= {files}
         columns={columns}
+
+        checkboxSelection
+        {/*체크 박스 선택시 id를 저장*/}
+        onSelectionModelChange = {(id) => {
+          setSelectionModel(id);
+          const selectedIDs = new Set(id);
+          const selectedRowData = files.filter((row) =>
+            selectedIDs.has(row.id)
+          );
+
+          console.log(files);
+        }
+      }
+
+
         pageSize={10}
         rowsPerPageOptions={[5]}
         checkboxSelection={true}
