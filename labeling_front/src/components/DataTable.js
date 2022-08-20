@@ -4,13 +4,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DataGrid, GridToolbar, GridColDef } from '@mui/x-data-grid';
 import Button from '@material-ui/core/Button';
-
+import Modal from '@mui/material/Modal';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import FuncBtn from './FuncBtn';
-
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 import Stack from '@mui/material/Stack';
 
 import Box from '@mui/material/Box';
+
+//삭제 모달 스타일
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 300,
+  height: 250,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
 //열 종류및 스타일
 
 const columns : GridColDef[]= [
@@ -44,11 +61,18 @@ const columns : GridColDef[]= [
 ];
 
 export default function DataTable() {
+//삭제 버튼 클릭시 모듈 나오게 하려고 씀
+const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+
+const [value, setValue] = React.useState(0);
+
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  {/*삭제 버튼 구현을 위한 변수*/}
+
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
@@ -76,10 +100,14 @@ export default function DataTable() {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!files) return null;
 
+
+
+
+
+
   return (
     <div style={{ height: 650, width: '100%' }}>
 
-      {/*인식 요청 및 삭제 버튼*/}
         <Box sx={{ width: '100%' }}>
         <Stack
           direction="row"
@@ -89,17 +117,64 @@ export default function DataTable() {
           {/*인식, 삭제 버튼 */}
           <Box>
               <FuncBtn></FuncBtn>
-            {/*선택된 row의 id를 가져와서 필터링 해주는 버튼*/}
-              <Button
-        onClick={() => {
-          const selectedIDs = new Set(selectionModel);
-          setFiles((r) => r.filter((x) => !selectedIDs.has(x.id)));
-        }}
-        variant="contained"
-        startIcon={<DeleteOutlinedIcon /> }
-      >
-        삭제
-      </Button>
+
+              <Button onClick={handleOpen} variant="contained" startIcon={<DeleteOutlinedIcon /> }>삭제</Button>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+        <Box sx={style}>
+          <Box
+            sx={{ borderBottom: 1 }}
+          >
+            <p><strong>작업 삭제</strong></p>
+          </Box>
+          <Box
+            sx={{borderBottom:1, height:150}}
+          >
+            선택한 작업을 삭제 하시겠습니까?
+          </Box>
+          {/*버튼 컨테이너 */}
+          <Box
+            sx={{
+
+              display:'flex',
+              justifyContent:'flex-end',
+              alignItems:"center",
+
+          }}
+          >
+          {/*취소버튼 */}
+            <Button
+              variant="contained"
+              startIcon={<CloseIcon/> }
+              onClick={handleClose}
+            >
+              취소
+            </Button>
+
+            {/*삭제버튼 */}
+            <Button
+              color="error"
+              onClick={() => {
+                const selectedIDs = new Set(selectionModel);
+                setFiles((r) => r.filter((x) => !selectedIDs.has(x.id)));
+                handleClose()
+              }}
+
+              variant="contained"
+              startIcon={<CheckIcon/> }
+            >
+              삭제
+            </Button>
+          </Box>
+        </Box>
+
+      </Modal>
+
           </Box>
         </Stack>
       </Box>
@@ -113,7 +188,7 @@ export default function DataTable() {
         columns={columns}
 
         checkboxSelection
-        {/*체크 박스 선택시 id를 저장*/}
+
         onSelectionModelChange = {(id) => {
           setSelectionModel(id);
           const selectedIDs = new Set(id);
@@ -128,7 +203,7 @@ export default function DataTable() {
 
         pageSize={10}
         rowsPerPageOptions={[5]}
-        checkboxSelection={true}
+
         components={{ Toolbar: GridToolbar }}
         componentsProps={{
           toolbar: {
