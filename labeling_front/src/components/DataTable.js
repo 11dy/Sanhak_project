@@ -136,6 +136,10 @@ const [value, setValue] = React.useState(0);
             sx={{borderBottom:1, height:150}}
           >
             선택한 작업을 삭제 하시겠습니까?
+
+            <pre style={{ fontSize: 10 }}>
+              {JSON.stringify(selectionModel, null, 4)}
+            </pre>
           </Box>
           {/*버튼 컨테이너 */}
           <Box
@@ -162,6 +166,7 @@ const [value, setValue] = React.useState(0);
               onClick={() => {
                 const selectedIDs = new Set(selectionModel);
                 setFiles((r) => r.filter((x) => !selectedIDs.has(x.id)));
+                {/*모달창 닫기위한 handleClose*/}
                 handleClose()
               }}
 
@@ -199,6 +204,7 @@ const [value, setValue] = React.useState(0);
           console.log(files);
         }
       }
+      {...files}
 
 
         pageSize={10}
