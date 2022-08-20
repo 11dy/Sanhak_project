@@ -198,10 +198,10 @@ const [value, setValue] = React.useState(0);
           setSelectionModel(id);
           const selectedIDs = new Set(id);
           const selectedRowData = files.filter((row) =>
-            selectedIDs.has(row.id)
+            selectedIDs.has(row.id.toString())
           );
 
-          console.log(files);
+          console.log(selectedRowData);
         }
       }
       {...files}
@@ -218,6 +218,8 @@ const [value, setValue] = React.useState(0);
           },
         }}
       />
+
+
     </div>
   );
 }
