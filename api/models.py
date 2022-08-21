@@ -27,3 +27,12 @@ class Audio(models.Model):
             self.name = self.file.name
         else:
             self.name = file_name
+
+
+class Result(models.Model):
+    result = models.JSONField(default=dict)
+    fid = models.ForeignKey("Audio", related_name="file_id", db_column="file_id", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.result.name
+

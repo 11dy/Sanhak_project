@@ -43,6 +43,7 @@ function LocalUpload() {
                 alert("업로드 성공");
             else
                 alert("업로드 실패");
+            window.location.reload()
         })
     }
     return (

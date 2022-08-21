@@ -7,9 +7,9 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import Audio
+from api.models import Audio, Result
 from api.serializer import AudioSerializer
-from api.utils import FileClass
+from api.utils import FileClass, stt_api
 from base.settings.base import OBJECT_STORAGE_URL, MEDIA_ROOT
 
 
@@ -39,6 +39,7 @@ def local_file_upload(request):
         )
         upload_file.set_name()
         upload_file.save()
+        stt_api(upload_file)
         return HttpResponse(json.dumps({"status": "Success"}))
 
 
@@ -75,5 +76,25 @@ def object_file_upload(request):
         upload_file.file.name = 'testob/' + name
         upload_file.set_name(name)
         upload_file.save()
+        stt_api(upload_file)
 
         return HttpResponse(json.dumps({"status": "Success"}))
+
+
+def delete_file(request):
+    if request.method == 'POST':
+        delete_list = request.POST.getlist('delete_ids')
+        for delete_id in delete_list:
+            record = Audio.objects.get(id=delete_id)
+            record.delete()
+
+        return HttpResponse(json.dumps({"status": "Success"}))
+
+
+def test(request):
+    re = Result.objects.all()
+
+    for r in re:
+        print(r.fid)
+        print(r.result)
+        print(r.id)

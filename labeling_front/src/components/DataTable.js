@@ -100,11 +100,6 @@ const [value, setValue] = React.useState(0);
   if (error) return <div>에러가 발생했습니다</div>;
   if (!files) return null;
 
-
-
-
-
-
   return (
     <div style={{ height: 650, width: '100%' }}>
 
@@ -133,13 +128,13 @@ const [value, setValue] = React.useState(0);
             <p><strong>작업 삭제</strong></p>
           </Box>
           <Box
-            sx={{borderBottom:1, height:150}}
+            sx={{borderBottom:1, height:80}}
           >
             선택한 작업을 삭제 하시겠습니까?
 
-            <pre style={{ fontSize: 10 }}>
+            {/* <pre style={{ fontSize: 10 }}>
               {JSON.stringify(selectionModel, null, 4)}
-            </pre>
+            </pre> */}
           </Box>
           {/*버튼 컨테이너 */}
           <Box
@@ -163,13 +158,29 @@ const [value, setValue] = React.useState(0);
             {/*삭제버튼 */}
             <Button
               color="error"
-              onClick={() => {
-                const selectedIDs = new Set(selectionModel);
-                setFiles((r) => r.filter((x) => !selectedIDs.has(x.id)));
-                {/*모달창 닫기위한 handleClose*/}
-                handleClose()
-              }}
-
+              onClick = { async (e) => {
+                const formData = new FormData();
+                selectionModel.map((id)=>{formData.append("delete_ids",id)})
+                formData.append("enctype", "multipart/form-data")
+            
+                const URL = "http://127.0.0.1:8000/api/delete_file"
+        
+                axios({
+                    method: "post",
+                    url: URL,
+                    data: formData,
+                    headers: {
+                        "Content-Type" : "multipart/form-data",
+                    }
+                }).then(response => {
+                    if(response.status == 200)
+                        alert("삭제 성공");
+                    else
+                        alert("삭제 실패");
+                    window.location.reload()
+                })
+              }
+            }
               variant="contained"
               startIcon={<CheckIcon/> }
             >
