@@ -77,8 +77,8 @@ function FuncBtn() {
   return (
     <>
 
-    <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon /> }>인식 작업 요청</Button>
-    <Modal
+      <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon />}>인식 작업 요청</Button>
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -89,7 +89,7 @@ function FuncBtn() {
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Object storage에서 선택" {...a11yProps(0)} />
             <Tab label="파일 업로드" {...a11yProps(1)} />
-            
+
           </Tabs>
           <TabPanel value={value} index={0}>
             <ObjectUpload />
@@ -98,12 +98,12 @@ function FuncBtn() {
             <LocalUpload />
           </TabPanel>
         </Box>
-        
+
       </Modal>
-      
-    
-    <Button variant="contained" startIcon={<DeleteForeverIcon />}>삭제</Button>
-    
+
+
+      <Button variant="contained" startIcon={<DeleteForeverIcon />}>삭제</Button>
+
     </>
   );
 }

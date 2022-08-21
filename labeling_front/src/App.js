@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme } from '@mui/material/styles';
 
 import './App.css';
 import LocalUpload from './components/LocalUpload';
@@ -23,7 +22,7 @@ class App extends Component {
           <Route path="/" element={<Main />} />
           <Route path="/LocalUpload" element={<LocalUpload />} />
           <Route path="/ObjectUpload" element={<ObjectUpload />} />
-          <Route path="/editpage" element={<Editpage />} />
+          <Route path="/editpage/:id" element={<Editpage />} />
         </Routes>
       </BrowserRouter>
     );

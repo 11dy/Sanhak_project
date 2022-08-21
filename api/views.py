@@ -91,6 +91,17 @@ def delete_file(request):
         return HttpResponse(json.dumps({"status": "Success"}))
 
 
+def get_result(request, pk):
+    file = Audio.objects.get(pk=pk)
+    result = Result.objects.get(id=file.id)
+    data = []
+    info = {"contentType": 0, "fileName": file.name, "fileSize": file.file.size, "mediaUrl": file.file.url}
+    data.append({"info": info})
+    stt_response = {"message": "Succeeded", "result": "SUCCEEDED", "segments": result.result}
+    data.append({"SttResponse": stt_response})
+    return HttpResponse(json.dumps(data))
+
+
 def test(request):
     re = Result.objects.all()
 

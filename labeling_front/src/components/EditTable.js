@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,26 +5,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TextField } from '@mui/material';
+import React from 'react';
 
-//데이터 클래스
-function createData(
-  name: string,
-  calories: number,
-  
-) {
-  return { name, calories};
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
-];
-
-export default function BasicTable() {
+export default function BasicTable(props) {
+  console.log(props['params'])
+  const stt = props['params'];
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 100 }} aria-label="simple table">
@@ -37,36 +21,38 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
 
-        {/*데이터 넣어주는곳 */}
-          {rows.map((row) => (
+          {/*데이터 넣어주는곳 */}
+          {stt.map((st) => (
             <TableRow
-              key={row.name}
+              key={st.start}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell 
-                component="th" 
+              <TableCell
+                component="th"
                 scope="row"
               >
-                {row.name}
+                {new Date(st.start).toISOString().substring(11, 19)}
                 <TableCell
-                    component={'tr'}
-                    color={'blue'}
+                  component={'th'}
+                  scope="row"
+                  color={'blue'}
                 >
-                    좋음
+                  {new Date(st.end).toISOString().substring(11, 19)}
                 </TableCell>
               </TableCell>
-              <TableCell 
+              <TableCell
                 align="left"
                 display='flex'
               >
-                {row.calories}
-                <TextField fullWidth  id="fullWidth" />
+                {st.text}<br></br>
+                <input type='text' value={st.text}></input>
               </TableCell>
-              
+
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+
   );
 }

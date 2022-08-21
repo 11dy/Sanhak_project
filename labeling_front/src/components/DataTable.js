@@ -10,7 +10,6 @@ import FuncBtn from './FuncBtn';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import Stack from '@mui/material/Stack';
-
 import Box from '@mui/material/Box';
 
 //삭제 모달 스타일
@@ -30,15 +29,13 @@ const style = {
 
 //열 종류및 스타일
 
-const columns : GridColDef[]= [
+const columns: GridColDef[] = [
   { field: 'name', headerName: '작업대상', width: 255 },
   { field: 'status', headerName: '작업현황', width: 150 },
   { field: 'request_method', headerName: '요청방법', width: 150 },
   {
     field: 'start_time',
     headerName: '작업 시작일',
-    dataType: "datetime",
-    format: "MM/dd/yyyy hh:mm tt",
     width: 200,
   },
   {
@@ -49,10 +46,11 @@ const columns : GridColDef[]= [
   {
     field: 'id',
     headerName: '인식 결과 편집',
-    width:150,
+    width: 150,
     renderCell: (params) => {
+      const id = params['id']
       const onClick = (e) => {
-        window.location.href= './Editpage'
+        window.location.href = './Editpage/' + id
       };
 
       return <Button onClick={onClick}>인식 결과 편집</Button>;
@@ -61,13 +59,10 @@ const columns : GridColDef[]= [
 ];
 
 export default function DataTable() {
-//삭제 버튼 클릭시 모듈 나오게 하려고 씀
-const [open, setOpen] = React.useState(false);
-const handleOpen = () => setOpen(true);
-const handleClose = () => setOpen(false);
-
-const [value, setValue] = React.useState(0);
-
+  //삭제 버튼 클릭시 모듈 나오게 하려고 씀
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -103,7 +98,7 @@ const [value, setValue] = React.useState(0);
   return (
     <div style={{ height: 650, width: '100%' }}>
 
-        <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%' }}>
         <Stack
           direction="row"
           spacing={1}
@@ -111,85 +106,85 @@ const [value, setValue] = React.useState(0);
         >
           {/*인식, 삭제 버튼 */}
           <Box>
-              <FuncBtn></FuncBtn>
+            <FuncBtn></FuncBtn>
 
-              <Button onClick={handleOpen} variant="contained" startIcon={<DeleteOutlinedIcon /> }>삭제</Button>
+            <Button onClick={handleOpen} variant="contained" startIcon={<DeleteOutlinedIcon />}>삭제</Button>
 
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-        <Box sx={style}>
-          <Box
-            sx={{ borderBottom: 1 }}
-          >
-            <p><strong>작업 삭제</strong></p>
-          </Box>
-          <Box
-            sx={{borderBottom:1, height:80}}
-          >
-            선택한 작업을 삭제 하시겠습니까?
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Box
+                  sx={{ borderBottom: 1 }}
+                >
+                  <p><strong>작업 삭제</strong></p>
+                </Box>
+                <Box
+                  sx={{ borderBottom: 1, height: 80 }}
+                >
+                  선택한 작업을 삭제 하시겠습니까?
 
-            {/* <pre style={{ fontSize: 10 }}>
+                  {/* <pre style={{ fontSize: 10 }}>
               {JSON.stringify(selectionModel, null, 4)}
             </pre> */}
-          </Box>
-          {/*버튼 컨테이너 */}
-          <Box
-            sx={{
+                </Box>
+                {/*버튼 컨테이너 */}
+                <Box
+                  sx={{
 
-              display:'flex',
-              justifyContent:'flex-end',
-              alignItems:"center",
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: "center",
 
-          }}
-          >
-          {/*취소버튼 */}
-            <Button
-              variant="contained"
-              startIcon={<CloseIcon/> }
-              onClick={handleClose}
-            >
-              취소
-            </Button>
+                  }}
+                >
+                  {/*취소버튼 */}
+                  <Button
+                    variant="contained"
+                    startIcon={<CloseIcon />}
+                    onClick={handleClose}
+                  >
+                    취소
+                  </Button>
 
-            {/*삭제버튼 */}
-            <Button
-              color="error"
-              onClick = { async (e) => {
-                const formData = new FormData();
-                selectionModel.map((id)=>{formData.append("delete_ids",id)})
-                formData.append("enctype", "multipart/form-data")
-            
-                const URL = "http://127.0.0.1:8000/api/delete_file"
-        
-                axios({
-                    method: "post",
-                    url: URL,
-                    data: formData,
-                    headers: {
-                        "Content-Type" : "multipart/form-data",
+                  {/*삭제버튼 */}
+                  <Button
+                    color="error"
+                    onClick={async (e) => {
+                      const formData = new FormData();
+                      selectionModel.map((id) => { formData.append("delete_ids", id) })
+                      formData.append("enctype", "multipart/form-data")
+
+                      const URL = "http://127.0.0.1:8000/api/delete_file"
+
+                      axios({
+                        method: "post",
+                        url: URL,
+                        data: formData,
+                        headers: {
+                          "Content-Type": "multipart/form-data",
+                        }
+                      }).then(response => {
+                        if (response.status == 200)
+                          alert("삭제 성공");
+                        else
+                          alert("삭제 실패");
+                        window.location.reload()
+                      })
                     }
-                }).then(response => {
-                    if(response.status == 200)
-                        alert("삭제 성공");
-                    else
-                        alert("삭제 실패");
-                    window.location.reload()
-                })
-              }
-            }
-              variant="contained"
-              startIcon={<CheckIcon/> }
-            >
-              삭제
-            </Button>
-          </Box>
-        </Box>
+                    }
+                    variant="contained"
+                    startIcon={<CheckIcon />}
+                  >
+                    삭제
+                  </Button>
+                </Box>
+              </Box>
 
-      </Modal>
+            </Modal>
 
           </Box>
         </Stack>
@@ -200,12 +195,12 @@ const [value, setValue] = React.useState(0);
         disableColumnFilter
         disableColumnSelector
         disableDensitySelector
-        rows= {files}
+        rows={files}
         columns={columns}
 
         checkboxSelection
 
-        onSelectionModelChange = {(id) => {
+        onSelectionModelChange={(id) => {
           setSelectionModel(id);
           const selectedIDs = new Set(id);
           const selectedRowData = files.filter((row) =>
@@ -214,8 +209,8 @@ const [value, setValue] = React.useState(0);
 
           console.log(selectedRowData);
         }
-      }
-      {...files}
+        }
+        {...files}
 
 
         pageSize={10}
