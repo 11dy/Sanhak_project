@@ -43,7 +43,6 @@
         인식결과 편집
         <button  type="button" class="btn-dark float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">내보내기</button>
     </div>
-
     <div class="row container py-3" style="height: 600px; max-width: 100%">
         <div class="col-sm-4">
         <!--오디오 및 동영상 표시 -->
@@ -77,7 +76,7 @@
                         <td>저장하기: <b>ctrl(Command) + s</b></td>
                     </tr>
                     <tr>
-                        <td>작업완료:<b>ctrl(Command) + e</b></td>
+                        <td>작업완료: reu<b>ctrl(Command) + e</b></td>
                         <td>내보내기: <b>ctrl(Command) + r</b> </td>
                     </tr>
                     </tbody>
@@ -87,7 +86,7 @@
     <!--라벨링 화면 -->
     <div class="col-sm mh-100" style="overflow: auto; font-size: 13px" >
         <form action="" method="post">
-            <table class="table table-bordered  table-hover">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr class="table-dark">
                    <th>타임 라인</th>
@@ -98,14 +97,26 @@
                     <col style="width: 15%"><col style="width: auto">
                     {% if result_list %}
                             {% for result in result_list %}
+
+
                     <!--중첩 테이블-->
                     <tr>
-                    <td colspan="2">
+                    <td colspan="2" class="p-0">
                         <table class="table mb-0 table-borderless">
                             <col style="width: 15%"><col style="width: auto">
                             <tr >
-                                <td style="font-size: small">{{result.start}}-{{result.end}}</td>   <!--타임라인-->
-                                <td>{{ result.text }}</td>  <!--음성인식 텍스트 표시-->
+                                <td class="timeLine" style="font-size: small">
+                                    <p class="timeLine-start">{{result.start}}</p>
+                                    <p class="timeLine-end">{{result.end}}</p>
+                                </td>
+                                <!--타임라인-->
+                                <td class="newStartText">
+                                    {% for test in result.words %}
+                                        {% for arr in test %}
+                                        <div class="newStart" style="display:none">{{arr}}</div>  <!--음성인식 텍스트 표시-->
+                                        {% endfor %}
+                                    {% endfor %}
+                                </td>
                             </tr>
                             <tr>
                                 {% if result.confidence >= 0.8 %}
@@ -132,11 +143,14 @@
     <!-- 오디오 플레이어 HTML -->
     <div class="audioPlayer position-fixed bottom-0 p-md-3" style="width: 100%; height: 60px">
         <audio id="audio-editFile"
+
                style="width: 100%; height: 40px"
                class="audioBox"
                src="{{ file.audio_file.url }}"
                controls="controls" currenttime >
         </audio>
+
     </div>
 </div>
+
 {% endblock %}
