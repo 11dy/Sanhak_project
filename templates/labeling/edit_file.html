@@ -85,7 +85,6 @@
         </div>
     <!--라벨링 화면 -->
     <div class="col-sm mh-100" style="overflow: auto; font-size: 13px" >
-        <form action="" method="post">
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr class="table-dark">
@@ -94,17 +93,16 @@
                    </tr>
                 </thead>
                 <tbody>
-                    <col style="width: 15%"><col style="width: auto">
+                    <form action="/labeling/return_json/" method="POST">
+                        <col style="width: 15%"><col style="width: auto">
                     {% if result_list %}
                             {% for result in result_list %}
-
-
                     <!--중첩 테이블-->
                     <tr>
                     <td colspan="2" class="p-0">
                         <table class="table mb-0 table-borderless">
                             <col style="width: 15%"><col style="width: auto">
-                            <tr >
+                            <tr>
                                 <td class="timeLine" style="font-size: small">
                                     <p class="timeLine-start">{{result.start}}</p>
                                     <p class="timeLine-end">{{result.end}}</p>
@@ -126,17 +124,19 @@
                                 {% else %}
                                 <td class="text-danger">나쁨</td>
                                 {% endif %}
-                                <td><input value="{{ result.textEdited }}"
-                                           class="border-0" style="width: 100%"></td>   <!--음성인식 결과 텍스트 표시-->
+                                <td><input type= "text" name="text_edited" value=""
+                                   class="border-0" style="width: 80%">   <!--음성인식 결과 텍스트 표시-->
                             </tr>
                         </table>
                     </td>
                     </tr>
                         {% endfor %}
                     {% endif %}
+                    <input type="hidden" name="file_id" value="{{ file.pk }}">
+            <input type= "submit" value="작업완료">
+                    </form>
                 </tbody>
                 </table>
-            </form>
         </div>
     </div>
 

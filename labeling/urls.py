@@ -10,5 +10,6 @@ urlpatterns = [
     path('delete_file/', delete_file),
     path('search_result/', search_result),
     path('add_object_storage/', add_object_storage),
-    path('test/', test)
+    path('test/', test),
+    path('return_json/', return_json)  # textEdited 수정 함수
 ]

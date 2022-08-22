@@ -1,4 +1,6 @@
 import datetime
+import json
+
 import requests
 
 from django.shortcuts import render, redirect
@@ -25,10 +27,33 @@ def home(request):
 def edit_file(request, pk):  # edit_file 가는 함수
     file = AudioFile.objects.get(pk=pk)
     url = 'labeling'+file.audio_file.url
+    file.status = '작업중'   # 작업 상태 변경
+    file.save()
     result = STTResult.objects.get(id=file.id)
     result_list = result.result_file
     context = {'file': file, 'url': url, 'result_list': result_list}
     return render(request, 'labeling/edit_file.html', context)
+
+
+def return_json(request):
+    """edit_file 에서 수정한 값을 textEdited 에 넣어줌 그리고 db 저장"""
+    if request.method == 'POST':
+        pk = request.POST.get('file_id')
+        file = AudioFile.objects.get(pk=pk)  # 파일 작업 상태 변경
+        result = STTResult.objects.get(pk=pk)
+        json_list = result.result_file
+        edited_text = request.POST.getlist('text_edited')
+        for jsonList, editedText in zip(json_list, edited_text):
+            jsonList['textEdited'] = editedText
+            if editedText is None:
+                continue
+        # for result in json_list:
+        #     print(result['textEdited'])
+        file.status = '작업완료'  # 파일 작업 상태 변경
+        file.save()
+        final = json.dumps(json_list, ensure_ascii=False)  #한글 깨짐 해결, json 문자열로 변경
+
+        return redirect('/labeling/')
 
 
 def add_file(request):
