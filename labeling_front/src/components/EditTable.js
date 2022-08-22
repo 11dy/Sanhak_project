@@ -6,6 +6,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import React from 'react';
+import {Box} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+
+
+
 
 export default function BasicTable(props) {
   console.log(props['params'])
@@ -15,8 +20,8 @@ export default function BasicTable(props) {
       <Table sx={{ minWidth: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell width={'10%'}>타임 라인</TableCell>
-            <TableCell align="left" width={'90%'}>인식 결과 편집</TableCell>
+            <TableCell width={'15%'}>타임 라인</TableCell>
+            <TableCell align="left" width={'85%'}>인식 결과 편집</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,25 +33,42 @@ export default function BasicTable(props) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell
-                component="th"
-                scope="row"
+                
               >
-                {new Date(st.start).toISOString().substring(11, 19)}
                 <TableCell
-                  component={'th'}
+                  component="th"
                   scope="row"
-                  color={'blue'}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+
+                  }}
                 >
-                  {new Date(st.end).toISOString().substring(11, 19)}
+                
+                  <TableCell>
+                    {new Date(st.start).toISOString().substring(11, 19)}
+                  </TableCell>
+                  <TableCell
+                    component={'th'}
+                    scope="row"
+                    color={'blue'}
+                    
+                  >
+                    
+                    {new Date(st.end).toISOString().substring(11, 19)}
+                  </TableCell>
+                
                 </TableCell>
+                
               </TableCell>
               <TableCell
                 align="left"
                 display='flex'
               >
                 {st.text}<br></br>
-                <input type='text' value={st.text}></input>
+                <input type='text' value={st.text} size='100'></input>
               </TableCell>
+              
 
             </TableRow>
           ))}

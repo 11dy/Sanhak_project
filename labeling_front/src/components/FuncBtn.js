@@ -102,7 +102,7 @@ function FuncBtn() {
       </Modal>
 
 
-      <Button variant="contained" startIcon={<DeleteForeverIcon />}>삭제</Button>
+      
 
     </>
   );
