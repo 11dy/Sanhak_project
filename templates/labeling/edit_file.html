@@ -50,7 +50,7 @@
             <img src="https://w7.pngwing.com/pngs/952/614/png-transparent-microphone-digital-audio-sound-recording-and-reproduction-computer-icons-microphone-electronics-microphone-logo.png"
                 class="rounded img-fluid">
             <div class="m-0 p-1 overflow-hidden">{{ file }}</div>
-            <div class="m-0 p-1 text-black-50 overflow-hidden">파일시간:  / 문장수:  </div>
+            <div class="m-0 p-1 text-black-50 overflow-hidden">파일시간:/ 문장수:  </div>
         </div>
          <!--단축키 설명-->
             <div class="col">
@@ -124,7 +124,7 @@
                                 {% else %}
                                 <td class="text-danger">나쁨</td>
                                 {% endif %}
-                                <td><input type= "text" name="text_edited" value=""
+                                <td><input type= "text" name="text_edited" value="{{result.textEdited}}"
                                    class="border-0" style="width: 80%">   <!--음성인식 결과 텍스트 표시-->
                             </tr>
                         </table>
@@ -133,7 +133,7 @@
                         {% endfor %}
                     {% endif %}
                     <input type="hidden" name="file_id" value="{{ file.pk }}">
-            <input type= "submit" value="작업완료">
+            <input type= "submit" class="btn btn-secondary" value="저장">
                     </form>
                 </tbody>
                 </table>

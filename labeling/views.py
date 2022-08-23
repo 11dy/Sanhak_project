@@ -47,11 +47,12 @@ def return_json(request):
             jsonList['textEdited'] = editedText
             if editedText is None:
                 continue
-        # for result in json_list:
-        #     print(result['textEdited'])
         file.status = '작업완료'  # 파일 작업 상태 변경
+        file.end_time = datetime.datetime.now()
         file.save()
-        final = json.dumps(json_list, ensure_ascii=False)  #한글 깨짐 해결, json 문자열로 변경
+
+        result.result_file = json_list
+        result.save()
 
         return redirect('/labeling/')
 
@@ -151,9 +152,10 @@ def stt_api(file):
 
 
 def test(request):
-    audio = AudioFile.objects.get(id=1)
+    audio = AudioFile.objects.get(id=2)
     result = STTResult.objects.get(id=audio.id)
     result_list = result.result_file
+    print(result_list)
+    print(type(result_list))
     context = {"audio": audio, 'result_list': result_list}
     return render(request, 'labeling/test.html', context)
-
