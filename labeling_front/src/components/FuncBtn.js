@@ -77,7 +77,14 @@ function FuncBtn() {
   return (
     <>
 
-      <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon />}>인식 작업 요청</Button>
+      <Button 
+        onClick={handleOpen} 
+        variant="contained" 
+        color='primary'
+        startIcon={<AddIcon />}
+      >
+        인식 작업 요청
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

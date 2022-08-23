@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import React from 'react';
-import {Box} from '@mui/material';
+import {Box, TablePagination} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 
@@ -16,7 +16,10 @@ export default function BasicTable(props) {
   console.log(props['params'])
   const stt = props['params'];
   return (
-    <TableContainer component={Paper}>
+    <TableContainer 
+    component={Paper}
+    sx={{ maxHeight: 600 }}
+    >
       <Table sx={{ minWidth: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -44,18 +47,16 @@ export default function BasicTable(props) {
 
                   }}
                 >
-                
-                  <TableCell>
-                    {new Date(st.start).toISOString().substring(11, 19)}
-                  </TableCell>
+            
                   <TableCell
                     component={'th'}
                     scope="row"
                     color={'blue'}
                     
                   >
-                    
-                    {new Date(st.end).toISOString().substring(11, 19)}
+                    <span>{new Date(st.start).toISOString().substring(11, 19)}</span>
+                    <br></br>
+                    <span>+{new Date(st.end).toISOString().substring(11, 19)}</span>
                   </TableCell>
                 
                 </TableCell>
@@ -74,6 +75,7 @@ export default function BasicTable(props) {
           ))}
         </TableBody>
       </Table>
+      
     </TableContainer>
 
   );

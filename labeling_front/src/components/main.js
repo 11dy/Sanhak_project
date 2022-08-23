@@ -30,7 +30,7 @@ function Main() {
         >
           {/*최상단 제목과 아이콘 */}
           <Grid container direction="row" alignItems="center">
-            <ArticleIcon color='primary' sx={{ fontSize: 40 }} /> <h2>작업 목록</h2>
+            <ArticleIcon color='primary' sx={{ fontSize: 40 }} /> <h2 style={{ color: '' }}>작업 목록</h2>
           </Grid>
         </Box>
 

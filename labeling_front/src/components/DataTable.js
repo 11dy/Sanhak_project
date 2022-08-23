@@ -108,7 +108,7 @@ export default function DataTable() {
           <Box>
             <FuncBtn></FuncBtn>
 
-            <Button onClick={handleOpen} variant="contained" startIcon={<DeleteOutlinedIcon />}>삭제</Button>
+            <Button onClick={handleOpen} variant="contained" startIcon={<DeleteOutlinedIcon />} color='primary'>삭제</Button>
 
             <Modal
               open={open}
@@ -152,7 +152,7 @@ export default function DataTable() {
 
                   {/*삭제버튼 */}
                   <Button
-                    color="error"
+                    
                     onClick={async (e) => {
                       const formData = new FormData();
                       selectionModel.map((id) => { formData.append("delete_ids", id) })
@@ -176,6 +176,7 @@ export default function DataTable() {
                       })
                     }
                     }
+                    
                     variant="contained"
                     startIcon={<CheckIcon />}
                   >
@@ -192,6 +193,16 @@ export default function DataTable() {
 
 
       <DataGrid
+        sx={{
+          boxShadow: 2,
+          border: 2,
+          borderColor: 'primary.light',
+          '& .MuiDataGrid-cell:hover': {
+            color: 'primary.main',
+          },
+        }}
+
+
         disableColumnFilter
         disableColumnSelector
         disableDensitySelector
