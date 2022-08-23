@@ -15,6 +15,9 @@ import AddIcon from '@mui/icons-material/Add';
 export default function BasicTable(props) {
   console.log(props['params'])
   const stt = props['params'];
+
+  
+  
   return (
     <TableContainer 
     component={Paper}
@@ -67,7 +70,12 @@ export default function BasicTable(props) {
                 display='flex'
               >
                 {st.text}<br></br>
-                <input type='text' value={st.text} size='100'></input>
+                <input 
+                  type='text' 
+                  defaultValue={st.text} 
+                  size='100'
+                  
+                  ></input>
               </TableCell>
               
 

@@ -70,7 +70,7 @@ function Editpage() {
 
             {/*중단 파일 이미지와 텍스트 자리 */}
             <Box sx={{ width: '100%' }}>
-                바깥
+            
                 <Box sx={{ width: '100%', mt: 2, display: 'flex' }}>
                     {/*파일 이미지와 단축키 안내가 담긴 박스 */}
                     <Box sx={{ width: '35%', rowGap: 3 }}>
