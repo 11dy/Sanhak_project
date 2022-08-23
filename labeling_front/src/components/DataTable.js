@@ -26,7 +26,6 @@ const style = {
   p: 4,
 };
 
-
 //열 종류및 스타일
 
 const columns: GridColDef[] = [
@@ -37,11 +36,27 @@ const columns: GridColDef[] = [
     field: 'start_time',
     headerName: '작업 시작일',
     width: 200,
+    valueFormatter: (params) => {
+      if (params.value == null) {
+        return '';
+      }
+      const yymmdd = params.value.toString().substring(0,10);
+      const hhmmss = params.value.toString().substring(11,19);
+      return `${yymmdd} ${hhmmss}`;
+    },
   },
   {
     field: 'end_time',
     headerName: '작업 종료일',
     width: 200,
+    valueFormatter: (params) => {
+      if (params.value == null) {
+        return '';
+      }
+      const yymmdd = params.value.toString().substring(0,10);
+      const hhmmss = params.value.toString().substring(11,19);
+      return `${yymmdd} ${hhmmss}`;
+    },
   },
   {
     field: 'id',
@@ -90,11 +105,11 @@ export default function DataTable() {
 
     fetchFiles();
   }, []);
-  console.log(files)
+  console.log(files);
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!files) return null;
-
+  
   return (
     <div style={{ height: 650, width: '100%' }}>
 
@@ -126,10 +141,6 @@ export default function DataTable() {
                   sx={{ borderBottom: 1, height: 80 }}
                 >
                   선택한 작업을 삭제 하시겠습니까?
-
-                  {/* <pre style={{ fontSize: 10 }}>
-              {JSON.stringify(selectionModel, null, 4)}
-            </pre> */}
                 </Box>
                 {/*버튼 컨테이너 */}
                 <Box

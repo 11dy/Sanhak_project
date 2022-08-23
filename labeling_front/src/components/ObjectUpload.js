@@ -44,7 +44,7 @@ function ObjectUpload() {
     const uploadModule = async (e) => {
         e.preventDefault();
         const language = e.target[0].value;
-
+        
         const file = e.target[1].value;
 
         const formData = new FormData();
