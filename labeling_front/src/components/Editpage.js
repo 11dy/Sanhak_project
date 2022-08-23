@@ -94,6 +94,7 @@ function Editpage() {
                                 </Box>
 
                             </Box>
+                            
                             <div>
                                 파일 이름
                             </div>
@@ -101,9 +102,7 @@ function Editpage() {
                                 파일 정보
                             </div>
 
-                            <Box sx={{ height: 200 }}>
-                                단축키 설명
-                            </Box>
+                            
                         </Box>
                     </Box>
                     {/*오디오 텍스트 자리 */}

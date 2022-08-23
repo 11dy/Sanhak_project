@@ -23,7 +23,7 @@ export default function BasicTable(props) {
     component={Paper}
     sx={{ maxHeight: 600 }}
     >
-      <Table sx={{ minWidth: 100 }} aria-label="simple table">
+      <Table sx={{ minWidth: 100 }} aria-label="simple table" stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell width={'15%'}>타임 라인</TableCell>
