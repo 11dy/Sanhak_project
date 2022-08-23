@@ -88,8 +88,19 @@
 
 <div class="container my-3">
 <h2> 작업목록 </h2>
+
 <table>
 <tbody>
+    <!--검색창-->
+    <div id="searchbox-container" style="float:right;">
+        <div id=input-group">
+            <form action="/labeling/search_result/" method="POST">
+                <input type="text" name="search_text">
+                <button class="btn btn-dark btn-lg btn-block" type="submit">검색</button>
+            </form>
+        </div>
+    </div>
+
     <th>
         <button type="button" class="btn btn-dark btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
         인식 작업 요청
@@ -99,6 +110,7 @@
         <form action="/labeling/delete_file/" method="GET" enctype="multipart/form-data">
         <button type="submit" class="btn btn-dark btn-lg btn-block" value="삭제">삭제</button>
     </th>
+
 </tbody>
 </table>
 
@@ -127,7 +139,7 @@
             <th>인식 결과 편집</th>
         </tr>
         </thead>
-        <tbody id="user-table">
+        <tbody id="user-table" style="white-space: nowrap">
         {% if work_list %}
         {% for work in work_list %}
         <tr class="dept-data-row">
@@ -137,7 +149,9 @@
             <td>{{ work.request_method }}</td>
             <td>{{ work.start_time }}</td>
             <td>{{ work.end_time }}</td>
-            <td><a class="btn btn-secondary" onclick="location.href='/labeling/edit_file/'+{{ work.id }}" role="button">인식 결과 편집</a></td>
+            <td><a class="btn btn-secondary" onclick="location.href='/labeling/edit_file/'+{{ work.id }}" role="button">
+                인식결과 편집
+            </a></td>
         </tr>
         {% endfor %}
         {% else %}
@@ -188,17 +202,7 @@
     </form>
 </div>
 </div>
-    <!--검색창-->
-    <div id="searchbox-container">
-        <div id="just-empty">
 
-        </div>
-        <div "input-group">
-            <form action="/labeling/search_result/" method="POST">
-                <input type="text" name="search_text">
-                <input type="submit" name="검색">
-            </form>
-        </div>
-    </div>
+
 
 {% endblock %}
