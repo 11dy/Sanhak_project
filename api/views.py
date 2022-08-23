@@ -93,6 +93,9 @@ def delete_file(request):
 
 def get_result(request, pk):
     file = Audio.objects.get(pk=pk)
+    if file.status != '작업완료':
+        file.status = '작업중'
+        file.save()
     result = Result.objects.get(id=file.id)
     data = []
     info = {"contentType": 0, "fileName": file.name, "fileSize": file.file.size, "mediaUrl": file.file.url}
@@ -102,10 +105,23 @@ def get_result(request, pk):
     return HttpResponse(json.dumps(data))
 
 
-def test(request):
-    re = Result.objects.all()
+def save_result(request):
+    if request.method == 'POST':
+        pk = request.POST['file_id']
+        text_edited = request.POST.getlist('text_edited')
+        file = Audio.objects.get(pk=pk)  # 파일 작업 상태 변경
+        result = Result.objects.get(pk=pk)
+        update_result = result.result
 
-    for r in re:
-        print(r.fid)
-        print(r.result)
-        print(r.id)
+        for update_res, edit in zip(update_result, text_edited):
+            update_res['textEdited'] = edit
+
+        file.status = '작업완료'  # 파일 작업 상태 변경
+        file.end_time = datetime.datetime.now()
+        file.save()
+
+        result.result = update_result
+        result.save()
+
+        return HttpResponse(json.dumps({"status": "Success"}))
+

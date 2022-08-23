@@ -1,5 +1,8 @@
 from django.db import models
 import os
+
+from rest_framework import serializers
+
 import base.settings.base as settings
 
 

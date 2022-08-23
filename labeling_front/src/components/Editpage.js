@@ -44,8 +44,8 @@ function Editpage() {
     if (!dataes) return null;
 
     const stt = dataes[1]['SttResponse']['segments']
-    const urls = dataes[0]['info']['mediaUrl']
-    console.log(urls)
+    const urls = "http://localhost:8000" + dataes[0]['info']['mediaUrl']
+    const info = dataes[0]['info']
 
     return (
         <>
@@ -92,17 +92,16 @@ function Editpage() {
                                 }}>
                                     <MicTwoToneIcon className="fa-plus-circle" sx={{ fontSize: 100 }}></MicTwoToneIcon>
                                 </Box>
-
                             </Box>
-                            
                             <div>
-                                파일 이름
+                                파일 이름: {info['fileName']}
                             </div>
                             <div>
-                                파일 정보
+                                파일 크기: {info['fileSize']}
                             </div>
-
-                            
+                            <div>
+                                문장 수: {stt.length}    
+                            </div>                        
                         </Box>
                     </Box>
                     {/*오디오 텍스트 자리 */}
