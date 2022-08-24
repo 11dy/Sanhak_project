@@ -4,6 +4,9 @@ const timeLine = document.getElementsByClassName("timeLine")        //시작-끝
 const textSet = document.getElementsByClassName("newStartText")     //문장
 const textSetElement = document.getElementsByClassName("newStart")  //문자
 const fileTextNumbers = document.getElementById("fileTextNumbers")   //이미지 영역 아래 문장 수 div
+const fileTime = document.getElementById("fileTimes")
+
+
 
 //*실행부*//
 audioFile.ontimeupdate = function () {now()}
@@ -49,6 +52,8 @@ function now(){
 function reText(){
     const textSetCount = textSet.length
     fileTextNumbers.innerHTML="문장수: " + textSetCount.toString()
+    fileTime.innerHTML="파일시간: " + Math.floor(audioFile.duration / 60) + ":" + Math.floor(audioFile.duration % 60)
+    console.log(1000)
 
     for (i=0; i<textSetCount; i++){
         const textSetChildCount = textSet.item(i).childElementCount
@@ -60,7 +65,6 @@ function reText(){
         let TimeLineEnd = timeLine.item(i).lastElementChild
         TimeLineStart.innerHTML = "Start: " + Math.floor(TimeLineStart.innerHTML /1000) + "s"
         TimeLineEnd.innerHTML = "End: " + Math.floor(TimeLineEnd.innerHTML /1000) + "s"
-
     }
 }
 //단어 클릭시
