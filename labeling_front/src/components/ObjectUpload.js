@@ -45,15 +45,20 @@ function ObjectUpload() {
 
     const uploadModule = async (e) => {
         e.preventDefault();
-        const language = e.target[0].value;
-        
-        const file = e.target[1].value;
+        console.log(e.target[1].checked);
 
+        var i = 0
+        var file =""
+        for(i=1;i<e.target.length;i++){
+            if(e.target[i].checked == true)
+                file = e.target[i].value;
+        }
+        const language = e.target[0].value;
         const formData = new FormData();
         formData.append("language", language);
         formData.append("file", file);
         formData.append("enctype", "multipart/form-data")
-
+        console.log(formData);
         const URL = "http://127.0.0.1:8000/api/object_file_upload"
 
         axios({

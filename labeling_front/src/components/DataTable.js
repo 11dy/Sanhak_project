@@ -31,17 +31,33 @@ const style = {
 
 const columns: GridColDef[] = [
   { field: 'name', headerName: '작업대상', width: 255 },
-  { field: 'status', headerName: '작업현황', width: 150 },
-  { field: 'request_method', headerName: '요청방법', width: 150 },
+  { field: 'status', headerName: '작업현황', width: 130 },
+  { field: 'request_method', headerName: '요청방법', width: 170 },
   {
     field: 'start_time',
     headerName: '작업 시작일',
     width: 200,
+    valueFormatter: (params) => {
+      if (params.value == null) {
+        return '';
+      }
+      const yymmdd = params.value.toString().substring(0,10);
+      const hhmmss = params.value.toString().substring(11,19);
+      return `${yymmdd} ${hhmmss}`;
+    },
   },
   {
     field: 'end_time',
     headerName: '작업 종료일',
     width: 200,
+    valueFormatter: (params) => {
+      if (params.value == null) {
+        return '';
+      }
+      const yymmdd = params.value.toString().substring(0,10);
+      const hhmmss = params.value.toString().substring(11,19);
+      return `${yymmdd} ${hhmmss}`;
+    },
   },
   {
     field: 'id',

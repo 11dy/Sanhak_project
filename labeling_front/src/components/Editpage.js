@@ -11,6 +11,27 @@ import EditTable from './EditTable'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+function getReadableFileSizeString(fileSizeInBytes) {
+    var i = -1;
+    var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+    do {
+        fileSizeInBytes /= 1024;
+        i++;
+    } while (fileSizeInBytes > 1024);
+
+    return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+}
+
+function func(stt){
+    var i = 0;
+    var sum = 0;
+    for(i=0;i<stt.length;i++){
+        sum += stt[i].words.length;
+    }
+
+    return sum;
+}
+
 function Editpage() {
     const params = useParams();
     const id = params['id'];
@@ -46,6 +67,7 @@ function Editpage() {
     const stt = dataes[1]['SttResponse']['segments']
     const urls = "http://localhost:8000" + dataes[0]['info']['mediaUrl']
     const info = dataes[0]['info']
+    const words = func(stt);
 
     return (
         <>
@@ -70,7 +92,7 @@ function Editpage() {
 
             {/*중단 파일 이미지와 텍스트 자리 */}
             <Box sx={{ width: '100%' }}>
-            
+
                 <Box sx={{ width: '100%', mt: 2, display: 'flex' }}>
                     {/*파일 이미지와 단축키 안내가 담긴 박스 */}
                     <Box sx={{ width: '35%', rowGap: 3 }}>
@@ -82,7 +104,7 @@ function Editpage() {
                                 height={300}
                             >
                                 <Box sx={{
-                                    bgcolor: 'error.main',
+                                    bgcolor: '#1976D2',
                                     height: 250,
                                     width: 250,
                                     justifyContent: "center",
@@ -97,11 +119,14 @@ function Editpage() {
                                 파일 이름: {info['fileName']}
                             </div>
                             <div>
-                                파일 크기: {info['fileSize']}
+                                파일 크기: {getReadableFileSizeString(info['fileSize'])}
                             </div>
                             <div>
-                                문장 수: {stt.length}    
-                            </div>                        
+                                문장 수: {stt.length} 
+                            </div>
+                            <div>
+                                단어 수: {words}
+                            </div>
                         </Box>
                     </Box>
                     {/*오디오 텍스트 자리 */}
