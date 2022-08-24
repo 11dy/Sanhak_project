@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FolderIcon from '@mui/icons-material/Folder';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import ReplyIcon from '@mui/icons-material/Reply';
 import { Button } from '@mui/material';
 
 
@@ -100,7 +101,8 @@ function ObjectUpload() {
                 <Button 
                     type="submit" 
                     onClick={() => window.location.reload()} 
-                    variant='contained'>
+                    variant='contained'
+                    startIcon={<ReplyIcon/>}>
                    인식요청 </Button>
             </form>
         </>

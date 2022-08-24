@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Dropzone, FileItem, FullScreenPreview } from "dropzone-ui";
 import { Button } from "@mui/material";
+import ReplyIcon from '@mui/icons-material/Reply';
 
 function LocalUpload() {
     const [files, setFiles] = useState([]);
@@ -74,8 +75,9 @@ function LocalUpload() {
             </Dropzone>
             <Button 
                     type="submit" 
-                    
-                    variant='contained'>
+                    variant='contained'
+                    startIcon={<ReplyIcon/>}
+                    >
                    인식요청 </Button>
         </form>
         </>
