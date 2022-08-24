@@ -38,7 +38,7 @@ function Editpage() {
     const url = 'http://localhost:8000/api/get_result/' + id;
     const [dataes, setDataes] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null);    
 
     useEffect(() => {
         const fetchDataes = async () => {
@@ -145,6 +145,7 @@ function Editpage() {
                 >
 
                     <ReactPlayer
+                        id = "audioFile"
                         url={urls}
                         width="800px"
                         height="50px"

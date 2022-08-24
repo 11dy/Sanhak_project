@@ -51,6 +51,7 @@ function now(){
 // [start, end, text] 형태로 출력 되기 때문에 text만 보이게하기
 function reText(){
     const textSetCount = textSet.length
+    console.log(audioFile);
     fileTextNumbers.innerHTML="문장수: " + textSetCount.toString()
     fileTime.innerHTML="파일시간: " + Math.floor(audioFile.duration / 60) + ":" + Math.floor(audioFile.duration % 60)
     console.log(1000)
