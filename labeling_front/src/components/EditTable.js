@@ -12,6 +12,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import { useState } from "react";
 import { Box, TablePagination } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Button } from 'semantic-ui-react';
 
 
 
@@ -55,7 +56,15 @@ export default function BasicTable(props) {
     }
   return (
     <form onSubmit={updateModule}>
-      <input type="submit" value="저장"/>
+      
+      <Button type="submit"
+        sx={{
+          border:2,
+          color:'#181A21'
+        }}
+      >
+        저장
+      </Button>
     <TableContainer
       component={Paper}
       sx={{ maxHeight: 600 }}

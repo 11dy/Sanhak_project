@@ -13,12 +13,16 @@ import Tab from '@mui/material/Tab';
 import LocalUpload from './LocalUpload';
 import ObjectUpload from './ObjectUpload';
 
+
 //모달 내부 탭기능 구현
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
+
+
+
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -56,7 +60,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 600,
   height: 550,
-  bgcolor: 'background.paper',
+  bgcolor: '#181A21',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -78,9 +82,14 @@ function FuncBtn() {
     <>
 
       <Button 
+        style={{
+          border: 0,
+          backgroundColor: "#181A21",
+          
+        }}
+        variant="contained"
         onClick={handleOpen} 
-        variant="contained" 
-        color='primary'
+        
         startIcon={<AddIcon />}
       >
         인식 작업 요청

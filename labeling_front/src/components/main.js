@@ -23,7 +23,7 @@ function Main() {
             flexDirection: 'row',
             p: 1,
             m: 1,
-            bgcolor: 'background.paper',
+            bgcolor: '#181A21',
             borderRadius: 1,
             height: 100,
           }}

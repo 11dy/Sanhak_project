@@ -50,7 +50,7 @@ function Editpage() {
     return (
         <>
             {/*최상단 제목과 아이콘과 내보내기 버튼 */}
-            <Box sx={{ width: '100%', height: 100, display: 'flex' }}>
+            <Box sx={{ width: '100%', height: 100, display: 'flex', borderBottom: 1 }}>
                 <Grid container direction="row" alignItems="center">
                     <NoteAltIcon sx={{ fontSize: 40 }} /> <h2>인식 결과 편집</h2>
                 </Grid>
