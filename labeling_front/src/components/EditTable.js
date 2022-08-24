@@ -34,10 +34,17 @@ export default function BasicTable(props) {
     const { text_edited } = e.target;
     const formData = new FormData();
 
-    var i;
-    for (i = 0; i < text_edited.length; i++) {
-      formData.append("text_edited", text_edited[i].value);
+    if(!text_edited.length){
+      formData.append("text_edited", text_edited.value);
     }
+    else{
+      var i = 0;
+      for (i = 0; i < text_edited.length; i++) {
+        console.log(text_edited[i].value)
+        formData.append("text_edited", text_edited[i].value);
+      }
+    }
+
     formData.append("file_id", id)
     formData.append("enctype", "multipart/form-data")
 
@@ -67,7 +74,6 @@ export default function BasicTable(props) {
         variant='contained'
         startIcon={<SaveIcon/>}>
         저장 </Button>
-
 
       <TableContainer
         component={Paper}
