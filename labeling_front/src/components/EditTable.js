@@ -13,6 +13,11 @@ import { useState } from "react";
 import { Box, TablePagination } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from 'semantic-ui-react';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import EditIcon from '@mui/icons-material/Edit';
+import { Grid } from '@mui/material';
+import { fontWeight } from '@mui/system';
+
 
 
 
@@ -57,14 +62,20 @@ export default function BasicTable(props) {
   return (
     <form onSubmit={updateModule}>
       
-      <Button type="submit"
-        sx={{
-          border:2,
-          color:'#181A21'
+      <input
+        type="submit"      
+        value='저장'
+        style={{
+          fontWeight:'bold',
+          fontSize: 20,
+          height: 30,
+          color:'#181818',
+          backgroundColor: '#181A21'
+          
         }}
-      >
-        저장
-      </Button>
+        />
+       
+      
     <TableContainer
       component={Paper}
       sx={{ maxHeight: 600 }}
@@ -115,14 +126,24 @@ export default function BasicTable(props) {
                 align="left"
                 display='flex'
               >
-                {st.text}<br></br>
-                <input
+                <Grid container direction="row" alignItems="center">
+                  <VolumeUpIcon color='primary' sx={{ fontSize: 20 }} /> 
+                  <p>&nbsp;&nbsp;</p>
+                  {st.text}
+                </Grid>
+                <br></br>
+                <Grid container direction="row" alignItems="center">
+                  <EditIcon color='primary' sx={{ fontSize: 20 }} /> 
+                  <p>&nbsp;&nbsp;</p>
+                  <input
                   type='text'
                   name="text_edited"
                   defaultValue={st.textEdited}
                   size='100'
 
                 ></input>
+                </Grid>
+                
               </TableCell>
 
 

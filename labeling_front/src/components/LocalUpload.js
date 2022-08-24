@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Dropzone, FileItem, FullScreenPreview } from "dropzone-ui";
+import { Button } from "@mui/material";
+
 function LocalUpload() {
     const [files, setFiles] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
@@ -70,7 +72,11 @@ function LocalUpload() {
                     />
                 ))}
             </Dropzone>
-            <input type="submit" value="인식 요청"/>
+            <Button 
+                    type="submit" 
+                    
+                    variant='contained'>
+                   인식요청 </Button>
         </form>
         </>
     );

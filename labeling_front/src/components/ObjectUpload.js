@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FolderIcon from '@mui/icons-material/Folder';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import { Button } from '@mui/material';
+
 
 function ObjectUpload() {
     const [files, setFiles] = useState(null);
@@ -90,7 +92,11 @@ function ObjectUpload() {
                     </tbody>
                 </table>
                 <p></p>
-                <input type="submit" value="인식 요청" onClick={() => window.location.reload()} />
+                <Button 
+                    type="submit" 
+                    onClick={() => window.location.reload()} 
+                    variant='contained'>
+                   인식요청 </Button>
             </form>
         </>
     )
