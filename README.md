@@ -7,6 +7,9 @@
 - 목적: STT 라벨링 도구 구현을 통해 음성을 AI를 통해 학습하고 작업의 효율성을 증가시킴
 - https://swarc.kangwon.ac.kr/exhibition/2022/?bbsId=BBSMSTR_000000000011&nttId=249&flag=view
 
+SKILL 
+- Django, bootstrap, react
+
 
 ## What's New
 - **(2022/08/02)**
