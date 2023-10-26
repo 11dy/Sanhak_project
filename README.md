@@ -2,7 +2,10 @@
 
 더존비즈온 산학 프로젝트
 
-- 콜센터 음성 라벨링 도구 개발
+- 콜센터 음성 라벨링 도구 
+- 기업으로 유입되는 음성 분석을 위한 음성을 텍스트로 변환하는 STT 모델
+- 목적: STT 라벨링 도구 구현을 통해 음성을 AI를 통해 학습하고 작업의 효율성을 증가시킴
+- https://swarc.kangwon.ac.kr/exhibition/2022/?bbsId=BBSMSTR_000000000011&nttId=249&flag=view
 
 
 ## What's New
